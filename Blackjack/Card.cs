@@ -120,15 +120,15 @@ namespace Blackjack2
         public char Get_DisplaySuit()
         {
             if (suit == Suit.Hearts)
-                return 'H';
+                return '\u2665';
             if (suit == Suit.Diamonds)
-                return 'D';
+                return '\u2666';
             if (suit == Suit.Clubs)
-                return 'C';
+                return '\u2663';
             if (suit == Suit.Spades)
-                return 'S';
+                return '\u2660';
             else
-                return 'X';
+                return ' ';
         }
 
         public void Draw_Back()              //draws the back of a card (for hold cards)

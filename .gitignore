@@ -1,4 +1,10 @@
 
 /.vs
+/.vscode
 /Blackjack/bin
 /Blackjack/obj
+/PythonBlackjack/__pycache__
+/PythonBlackjack/.pytest_cache
+/PythonBlackjack/tests/__pycache__
+/PythonBlackjack/venv
+settings.json

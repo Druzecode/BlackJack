@@ -52,7 +52,7 @@ namespace Blackjack2
             Console.Clear();                      //clears screen
         }
 
-        public bool Choice(Player player, Deck d1, int bet)
+        public bool Choice(Player player, Deck d1, ref int bet)
         {
             bool cont = true;       //continues
             bool split = false;     //becomes true when the split function is chosen
@@ -167,7 +167,7 @@ namespace Blackjack2
                 }
                 else if (choice == 4)
                 {
-                    DoubleDown(player, d1, bet);    //calls double down function if chosen
+                    DoubleDown(player, d1, ref bet);    //calls double down function if chosen
                     cont = false;
                 }
             }
@@ -206,8 +206,8 @@ namespace Blackjack2
             Hit(player, d1);                    //adds a new card to first hand
             Hit(player2, d1);                   //adds a new card to second hand
 
-            Choice(player, d1, bet);            //plays first hand
-            Choice(player2, d1, bet);           //plays second hand
+            Choice(player, d1, ref bet);            //plays first hand
+            Choice(player2, d1, ref bet);           //plays second hand
 
             H_Play(house, d1);                  //house plays
 
@@ -220,7 +220,7 @@ namespace Blackjack2
             Settle(player, house, bet);     //resets values from next hand
         }
 
-        public void DoubleDown(Player player, Deck d1, int bet)
+        public void DoubleDown(Player player, Deck d1, ref int bet)
         {
             bool x = false;
             Hit(player, d1);    //gives the player one more card

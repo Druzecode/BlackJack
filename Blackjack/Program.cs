@@ -5,7 +5,8 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        
+        Console.OutputEncoding = System.Text.Encoding.Unicode;  //This is necessary for the unicode suit characters to display
+
         Intro();            //displays intro sequence
         char go;            //continues the game if the user chooses to continue after each round
         int bet = 0;     //amount bet each hand
@@ -24,11 +25,11 @@ internal class Program
             if (d1.Get_Position() > 40) //shuffles the deck so that the cards will never be repeated
                 d1.Shuffle();
 
-            bet += game.Bet(player);     //prompts the player for a bet, and stores it as a double
+            bet = game.Bet(player);     //prompts the player for a bet, and stores it as a double
             game.Deal(player, d1, false);           //deals cards to player
             game.Deal(house, d1, true);          //deals cards to house
 
-            split = game.Choice(player, d1, bet);    //controls the route of the game if player chooses to split
+            split = game.Choice(player, d1, ref bet);    //controls the route of the game if player chooses to split
             if (split == true)
             {
                 game.Split(player, house, d1, bet);  //split sequence
@@ -44,8 +45,8 @@ internal class Program
 
         } while ((go == 'y' || go == 'Y') && player.money >= game.min_bet);  //exits game when user has no more money, or user chooses to quit
 
-        //cout << "Your final total was: $" << player.money << endl;
-        //cout << "Thanks for playing\n\n";
+        Console.WriteLine($"Your final total was: ${player.money}");
+        Console.WriteLine("Thanks for playing\n");
 
         Console.ReadKey();
     }
@@ -64,13 +65,13 @@ internal class Program
         for (int i = 0; i < 10; i++)
         {
             Thread.Sleep(50);
-            Console.Write("- ");
+            Console.Write("\u2663 ");
             Thread.Sleep(50);
-            Console.Write("= ");
+            Console.Write("\u2666 ");
             Thread.Sleep(50);
-            Console.Write("- ");
+            Console.Write("\u2660 ");
             Thread.Sleep(50);
-            Console.Write("= ");
+            Console.Write("\u2665 ");
         }
         Console.WriteLine("\n");
     }

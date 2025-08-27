@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blackjack", "Blackjack\Blackjack.csproj", "{7C76CE1A-43F7-468D-9819-69F30332F21D}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PythonBlackjack", "PythonBlackjack\PythonBlackjack.pyproj", "{A3DA9608-2DA8-4D73-9B0B-43B7E451E6EB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -11,6 +15,26 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C76CE1A-43F7-468D-9819-69F30332F21D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C76CE1A-43F7-468D-9819-69F30332F21D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C76CE1A-43F7-468D-9819-69F30332F21D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7C76CE1A-43F7-468D-9819-69F30332F21D}.Debug|x64.Build.0 = Debug|Any CPU
+		{7C76CE1A-43F7-468D-9819-69F30332F21D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7C76CE1A-43F7-468D-9819-69F30332F21D}.Debug|x86.Build.0 = Debug|Any CPU
+		{7C76CE1A-43F7-468D-9819-69F30332F21D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C76CE1A-43F7-468D-9819-69F30332F21D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C76CE1A-43F7-468D-9819-69F30332F21D}.Release|x64.ActiveCfg = Release|Any CPU
+		{7C76CE1A-43F7-468D-9819-69F30332F21D}.Release|x64.Build.0 = Release|Any CPU
+		{7C76CE1A-43F7-468D-9819-69F30332F21D}.Release|x86.ActiveCfg = Release|Any CPU
+		{7C76CE1A-43F7-468D-9819-69F30332F21D}.Release|x86.Build.0 = Release|Any CPU
+		{A3DA9608-2DA8-4D73-9B0B-43B7E451E6EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3DA9608-2DA8-4D73-9B0B-43B7E451E6EB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A3DA9608-2DA8-4D73-9B0B-43B7E451E6EB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A3DA9608-2DA8-4D73-9B0B-43B7E451E6EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3DA9608-2DA8-4D73-9B0B-43B7E451E6EB}.Release|x64.ActiveCfg = Release|Any CPU
+		{A3DA9608-2DA8-4D73-9B0B-43B7E451E6EB}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
