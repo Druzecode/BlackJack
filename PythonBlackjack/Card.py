@@ -22,27 +22,40 @@ class Card:
         QUEEN = 12
         KING = 13
 
-    def __init__(self):
-        self.suit = self.Suit.HEARTS  # default original suit
-        self.rank = self.Rank.ACE  # default original rank
+    @property
+    def suit(self):
+        return self._suit
 
+    @property
+    def rank(self):
+        return self._rank
+
+    def __init__(self):
+        self._suit = self.Suit.HEARTS  # default original suit
+        self._rank = self.Rank.ACE  # default original rank
+    
     def display_card(self):  # displays a card in text
-        print(f"{self.rank} of {self.suit}")
+        print(f"{self._rank.name} of {self._suit.name}")
 
     def set_suit(self, x):  # sets a card's suit
-        if x == 1:
-            self.suit = self.Suit.HEARTS
-        elif x == 2:
-            self.suit = self.Suit.DIAMONDS
-        elif x == 3:
-            self.suit = self.Suit.CLUBS
-        elif x == 4:
-            self.suit = self.Suit.SPADES
-        else:
-            print("Error")
+        if isinstance(x, self.Suit):
+            self._suit = x
+        elif isinstance(x, int):
+            suit_map = {
+                1: self.Suit.HEARTS,
+                2: self.Suit.DIAMONDS,
+                3: self.Suit.CLUBS,
+                4: self.Suit.SPADES
+            }
+            newSuit = suit_map.get(x)
+            if self._suit is not None:
+                self._suit = newSuit
 
     def set_rank(self, x):  # sets a card's rank
-        self.rank = self.Rank(x)
+        if isinstance(x, self.Rank):
+            self._rank = x
+        else:
+            self._rank = self.Rank(x)
 
     def get_value(self, flag):  # returns the value of a card
         if self.rank == self.Rank.ACE:
