@@ -34,7 +34,7 @@ def main():
     game = Game()
 
     while player.money >= game.min_bet:
-        if deck.get_position() > 40:
+        if deck.position() > 40:
             deck.shuffle()
 
         bet = game.bet(player)

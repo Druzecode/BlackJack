@@ -4,31 +4,49 @@ from Card import Card
 
 class Deck:
     def __init__(self):
-        self.cards = [] # Initialize an empty list to hold Card objects
-        self.position = 0  # beginning of deck
+        self.__cards = [] # Initialize an empty list to hold Card objects
+        self.__position = 0  # beginning of deck
+        count =0;
         for suit in range(1, 5):
             for rank in range(1, 14):
-                card = Card()
-                card.set_suit(suit)
-                card.set_rank(rank)
-                self.cards.append(card)
+                card = Card(suit, rank)
+                self.__cards.append(card)
+                count = count + 1
+
+    @property
+    def cards(self):
+        return self.__cards
+    
+    @property
+    def position(self):
+        return self.__position
 
     def shuffle(self):  # shuffles the deck
-        random.shuffle(self.cards)  # Use Python's built-in shuffle function
-        self.position = 0  # resets the pointer to the start of the deck
+        random.shuffle(self.__cards)  # Use Python's built-in shuffle function
+        self.__position = 0  # resets the pointer to the start of the deck
 
     def display(self, draw_cards=False):  # displays all of the cards in the deck
-        for card in self.cards:
+        for card in self.__cards:
             if draw_cards:
                 card.draw_card()
             else:
-                card.display_card()
+                card.display_card_as_text()
             print()
         print("\n\n")
 
-    def send_card(self):  # returns the "top" card on the deck
-        self.position += 1  # points to next card
-        return self.cards[self.position - 1]  # returns previous card
+    def draw_card(self):  # returns the "top" card on the deck
+        self.__position += 1  # points to next card
+        if(self.__position > len(self.__cards)):
+            raise IndexError("No more cards in the deck")
+        return self.__cards[self.__position - 1]  # returns previous card
 
-    def get_position(self):  # returns the position in the deck
-        return self.position
+    def validate_deck(self):  # Validates that the deck has 52 unique cards
+        if len(self.__cards) != 52:
+            return False
+        seen = set()
+        for card in self.__cards:
+            combo = (card.suit.value, card.rank.value)
+            if combo in seen:
+                return False
+            seen.add(combo)
+        return True

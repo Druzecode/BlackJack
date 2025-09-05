@@ -19,10 +19,10 @@ def test_card_defaults():
     assert card.rank == Card.Rank.ACE
 
 @pytest.mark.parametrize("suits, ranks", [
-    (range(1,4), range(1, 13)),
+    (range(1,5), range(1, 14)),
     (["HEARTS", "DIAMONDS", "CLUBS", "SPADES"], ["ACE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE", "TEN", "JACK", "QUEEN", "KING"]),
     (["hearts", "diamonds", "clubs", "spades"], ["ace", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king"]),
-    (["hearts", "Diamonds", "cLUbS", "spaDES"], range(1, 13))
+    (["hearts", "Diamonds", "cLUbS", "spaDES"], range(1, 14))
 ])
 def test_all_valid_card_values(suits, ranks):
     for s in suits:
@@ -58,7 +58,7 @@ def test_invalid_card_values(suit, rank, error):
     (13, None, 10)
 ])
 def test_card_value(rank, flag, value):
-    for suit in range(1,4): #do this for each suit to confirm there's no difference in different suits
+    for suit in range(1,5): #do this for each suit to confirm there's no difference in different suits
         assert Card(suit, rank).get_value(flag) == value
 
 @pytest.mark.parametrize("rank, value", [
@@ -77,7 +77,7 @@ def test_card_value(rank, flag, value):
     (13, "K ")
 ])
 def test_display_rank(rank, value):
-    for suit in range(1,4): #do this for each suit to confirm there's no difference in different suits
+    for suit in range(1,5): #do this for each suit to confirm there's no difference in different suits
         assert Card(suit, rank).get_display_rank() == value
 
 @pytest.mark.parametrize("suit, value", [
@@ -87,7 +87,7 @@ def test_display_rank(rank, value):
     (4, '\u2660') #spades
 ])
 def test_display_rank(suit, value):
-    for rank in range(1,13): #do this for each rank to confirm there's no difference
+    for rank in range(1,14): #do this for each rank to confirm there's no difference
         assert Card(suit, rank).get_display_suit() == value
 
 def test_display_card_as_text():

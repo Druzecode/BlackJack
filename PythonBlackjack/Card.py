@@ -24,11 +24,11 @@ class Card:
 
     @property
     def suit(self):
-        return self._suit
+        return self.__suit
 
     @property
     def rank(self):
-        return self._rank
+        return self.__rank
 
     def __init__(self, suit=None, rank=None):
         if(suit is None):
@@ -41,22 +41,22 @@ class Card:
     
     def __set_suit(self, x):  # sets a card's suit
         if isinstance(x, self.Suit):
-            self._suit = x
+            self.__suit = x
         elif isinstance(x, str):
-            self._suit = self.Suit[x.upper()]
+            self.__suit = self.Suit[x.upper()]
         else:
-            self._suit = self.Suit(x)
+            self.__suit = self.Suit(x)
 
     def __set_rank(self, x):  # sets a card's rank
         if isinstance(x, self.Rank):
-            self._rank = x
+            self.__rank = x
         elif isinstance(x, str):
-            self._rank = self.Rank[x.upper()]
+            self.__rank = self.Rank[x.upper()]
         else:
-            self._rank = self.Rank(x)
+            self.__rank = self.Rank(x)
 
     def display_card_as_text(self):  # displays a card in text
-        print(f"{self._rank.name} of {self._suit.name}")
+        print(f"{self.__rank.name} of {self.__suit.name}")
 
     def get_value(self, flag):  # returns the value of a card
         if self.rank == self.Rank.ACE:
