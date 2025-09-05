@@ -34,7 +34,7 @@ class Deck:
             print()
         print("\n\n")
 
-    def draw_card(self):  # returns the "top" card on the deck
+    def get_top_card(self):  # returns the "top" card on the deck
         self.__position += 1  # points to next card
         if(self.__position > len(self.__cards)):
             raise IndexError("No more cards in the deck")

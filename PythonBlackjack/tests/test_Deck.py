@@ -51,7 +51,7 @@ def test_deck_draw_card(iterations):
     drawn_cards = []
     for _ in range(iterations):
         if deck.position < 52:
-            card = deck.draw_card()
+            card = deck.get_top_card()
             assert card == deck.cards[deck.position - 1]
             assert card not in drawn_cards
             drawn_cards.append(card)
@@ -59,5 +59,5 @@ def test_deck_draw_card(iterations):
         else:
             assert len(drawn_cards) == 52
             with pytest.raises(IndexError):
-                deck.draw_card()
+                deck.get_top_card()
             
