@@ -30,32 +30,33 @@ class Card:
     def rank(self):
         return self._rank
 
-    def __init__(self):
-        self._suit = self.Suit.HEARTS  # default original suit
-        self._rank = self.Rank.ACE  # default original rank
+    def __init__(self, suit=None, rank=None):
+        if(suit is None):
+            suit = self.Suit.HEARTS
+        if(rank is None):    
+            rank = self.Rank.ACE
+        
+        self.__set_suit(suit)
+        self.__set_rank(rank) 
     
-    def display_card(self):  # displays a card in text
-        print(f"{self._rank.name} of {self._suit.name}")
-
-    def set_suit(self, x):  # sets a card's suit
+    def __set_suit(self, x):  # sets a card's suit
         if isinstance(x, self.Suit):
             self._suit = x
-        elif isinstance(x, int):
-            suit_map = {
-                1: self.Suit.HEARTS,
-                2: self.Suit.DIAMONDS,
-                3: self.Suit.CLUBS,
-                4: self.Suit.SPADES
-            }
-            newSuit = suit_map.get(x)
-            if self._suit is not None:
-                self._suit = newSuit
+        elif isinstance(x, str):
+            self._suit = self.Suit[x.upper()]
+        else:
+            self._suit = self.Suit(x)
 
-    def set_rank(self, x):  # sets a card's rank
+    def __set_rank(self, x):  # sets a card's rank
         if isinstance(x, self.Rank):
             self._rank = x
+        elif isinstance(x, str):
+            self._rank = self.Rank[x.upper()]
         else:
             self._rank = self.Rank(x)
+
+    def display_card_as_text(self):  # displays a card in text
+        print(f"{self._rank.name} of {self._suit.name}")
 
     def get_value(self, flag):  # returns the value of a card
         if self.rank == self.Rank.ACE:
@@ -162,5 +163,5 @@ class Card:
         print("\t└───────────┘")
 
         print("\t", end="")
-        self.display_card()
+        self.display_card_as_text()
         print("\n")
