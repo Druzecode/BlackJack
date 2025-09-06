@@ -1,4 +1,5 @@
 from enum import Enum
+from CardRender import CardRender
 
 class Card:
     class Suit(Enum):
@@ -31,6 +32,7 @@ class Card:
         return self.__rank
 
     def __init__(self, suit=None, rank=None):
+        self._renderer = CardRender()
         if(suit is None):
             suit = self.Suit.HEARTS
         if(rank is None):    
@@ -134,34 +136,7 @@ class Card:
             return ' '
 
     def draw_back(self):  # draws the back of a card (for hold cards)
-        print("\t┌───────────┐")
-        print("\t│***********│")
-        print("\t│***********│")
-        print("\t│***********│")
-        print("\t│***********│")
-        print("\t│***********│")
-        print("\t│***********│")
-        print("\t│***********│")
-        print("\t│***********│")
-        print("\t│***********│")
-        print("\t└───────────┘")
-
-        print("\tHold Card")
-        print("\n")
+        self._renderer.draw_back(self)
 
     def draw_card(self):  # draws a specific card's picture
-        print("\t┌───────────┐")
-        print(f"\t│ {self.get_display_rank()}        │")
-        print("\t│           │")
-        print("\t│           │")
-        print("\t│           │")
-        print(f"\t│     {self.get_display_suit()}     │")
-        print("\t│           │")
-        print("\t│           │")
-        print("\t│           │")
-        print(f"\t│        {self.get_display_rank()} │")
-        print("\t└───────────┘")
-
-        print("\t", end="")
-        self.display_card_as_text()
-        print("\n")
+        self._renderer.draw_card(self)
