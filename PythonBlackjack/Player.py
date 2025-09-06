@@ -1,12 +1,15 @@
 class Player:
-    def __init__(self, name=None, starting_amount=100):
+    def __init__(self, name=None, starting_amount=None):
         if(isinstance(name, str) and len(name) > 0):
             self.__name = name
         else:
             self.__name = input("Enter your player's name: ") or "Player1"
         
         self.__hand =  [] # Initialize an empty list to hold Card objects
-        self.__money = starting_amount  # Player's money
+        if(starting_amount != None and isinstance(starting_amount, int) and starting_amount > 0):
+            self.__money = starting_amount
+        else:
+            self.__money = 100  # Invalid format, use default value
 
     @property
     def name(self):
@@ -26,10 +29,19 @@ class Player:
     
     @property
     def total(self):
-        return len(self.__hand)
+        total = self.total_with_ace(False)
+        if(total > 21):
+            total = self.total_with_ace(True)
+        return total
 
-    def get_card(self, deck):
-        self.__hand.append(deck.get_top_card())
+    def total_with_ace(self, flag):
+        total = 0
+        for c in self.__hand:
+            total += c.get_value(flag)
+        return total
+
+    def get_card(self, card):
+        self.__hand.append(card)
 
     def display_cards(self):
         for card in self.__hand:

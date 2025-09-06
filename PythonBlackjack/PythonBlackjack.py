@@ -26,7 +26,7 @@ def intro():
     print("\n")
 
 def main():
-    intro()
+    #intro()
     deck = Deck()
     deck.shuffle()
     player = Player()
@@ -34,14 +34,14 @@ def main():
     game = Game()
 
     while player.money >= game.min_bet:
-        if deck.position() > 40:
+        if deck.position > 40:
             deck.shuffle()
 
         bet = game.bet(player)
         game.deal(player, deck, False)
         game.deal(house, deck, True)
 
-        split = game.choice(player, deck, bet)
+        split = game.play_hand(player, deck, bet)
         if split:
             game.split(player, house, deck, bet)
         else:
