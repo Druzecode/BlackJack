@@ -1,16 +1,8 @@
-import os
+
 
 class CardRender:
     def __init__(self):
-        try:
-            size = os.get_terminal_size()
-            columns = size.columns
-            rows = size.lines
-        except OSError:
-            columns = 80  # default width
-            rows = 24     # default height
-
-        print(f"Columns: {columns}, Rows: {rows}")
+        pass
 
     def draw_back(self, card):  # draws the back of a card (for hold cards)
         print("\t┌───────────┐")
@@ -30,7 +22,7 @@ class CardRender:
 
     def draw_card(self, card):  # draws a specific card's picture
         print("\t┌───────────┐")
-        print(f"\t│ {card.get_display_rank()}        │")
+        print(f"\t│ {card.get_display_rank()}         │")
         print("\t│           │")
         print("\t│           │")
         print("\t│           │")
@@ -38,7 +30,7 @@ class CardRender:
         print("\t│           │")
         print("\t│           │")
         print("\t│           │")
-        print(f"\t│        {card.get_display_rank()} │")
+        print(f"\t│        {card.get_display_rank()}  │")
         print("\t└───────────┘")
 
         print("\t", end="")

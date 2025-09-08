@@ -3,14 +3,50 @@ import time
 import math
 
 from Player import Player
+from GameDisplay import GameDisplay
 
 class Game:
-    def __init__(self):
+    def __init__(self, game_display=None):
         self.__min_bet = 5
+        self.__current_bet = 0
+        if(game_display != None and isinstance(game_display, GameDisplay)):
+            self.__game_display = game_display  
+        else:
+            self.__game_display = GameDisplay()
 
     @property
     def min_bet(self):
         return self.__min_bet
+
+    
+    def play(self, deck, player, house):
+        while player.money >= self.__min_bet:
+            if deck.position > 40:
+                deck.shuffle()
+
+            self.__current_bet = self.bet(player)
+            self.deal(player, deck, False)
+            self.__game_display.PrintGame(player, house, self.__current_bet, True)
+            print("Press any key to continue")
+            input()
+            self.deal(house, deck, True)
+            self.__game_display.PrintGame(player, house, self.__current_bet, True)
+            print("Press any key to continue")
+            input()
+            split = self.play_hand(player, deck)
+            if split:
+                self.split(player, house, deck)
+            else:
+                self.h_play(house, deck)
+                self.decision(player, house)
+                self.settle(player, house)  # No need for bet argument in settle
+
+            if(player.money < self.__min_bet):
+                break
+            go = input("Would you like to continue (y/n)? ")
+            print("\033c", end="")  # Clear screen
+            if go.lower() != 'y':
+                break
 
     def _validate_bet(self, bet, player):
         try:
@@ -39,20 +75,20 @@ class Game:
         print(f"{player.name} has: ")
         
         card1 = deck.get_top_card()
-        card1.draw_card()
+        #card1.draw_card()
         player.get_card(card1)
 
         card2 = deck.get_top_card()
-        if hide_card:
-            card2.draw_back()
-        else:
-            card2.draw_card()
+        #if hide_card:
+        #    card2.draw_back()
+        #else:
+        #    card2.draw_card()
         player.get_card(card2)
 
-        time.sleep(3)
-        print("\033c", end="")  # Clear screen
+        #time.sleep(3)
+        #print("\033c", end="")  # Clear screen
 
-    def play_hand(self, player, deck, bet):
+    def play_hand(self, player, deck):
         cont = True
         split = False
         while cont:
@@ -71,7 +107,7 @@ class Game:
 
             if player.total <= 21 and player.num_of_cards < 5:
 
-                if player.num_of_cards == 2 and player.money >= (bet * 2):
+                if player.num_of_cards == 2 and player.money >= (self.__current_bet * 2):
                     if player.hand[0].rank == player.hand[1].rank:
                         option_split = True
                     elif player.total == 10 or player.total == 11:
@@ -108,7 +144,7 @@ class Game:
                 split = True
                 cont = False
             elif choice == 4:
-                self.double_down(player, deck, bet)
+                self.double_down(player, deck, self.__current_bet)
                 cont = False
         return split
 
@@ -127,26 +163,24 @@ class Game:
         time.sleep(2)
         print("\033c", end="")  # Clear screen
 
-    def split(self, player, house, deck, bet):
+    def split(self, player, house, deck):
         player2 = Player(player.name + "'s second hand", 0)
         player2.hand.append(player.hand.pop())
         self.hit(player, deck)
         self.hit(player2, deck)
-        self.play_hand(player, deck, bet)
-        self.play_hand(player2, deck, bet)
+        self.play_hand(player, deck)
+        self.play_hand(player2, deck)
         self.h_play(house, deck)
         print("First Hand:")
-        self.decision(player, house, bet)
+        self.decision(player, house)
         print("Second Hand:")
-        self.decision(player2, house, bet)
-        player.money += player2.money
-        self.settle(player, house, bet)
+        self.decision(player2, house)
+        player.win_amount(player2.money)
+        self.settle(player, house)
 
-    def double_down(self, player, deck, bet):
+    def double_down(self, player, deck):
         self.hit(player, deck)
-        bet *= 2
-        flag = player.total == 11
-        player.total += player.hand[-1].get_value(flag)
+        self.__current_bet *= 2
 
     def h_play(self, house, deck):
         cont = True
@@ -157,7 +191,7 @@ class Game:
             for card in house.hand:
                 card.draw_card()
 
-            print(f"\n{house.name} has a total of: {house.total}, and chooses to ", end="")
+            print(f"\n{house.name} has a total of: {house.total}, and chooses to hit", end="")
             if house.total < 17:
                 time.sleep(2.5)
                 self.hit(house, deck)
@@ -165,26 +199,26 @@ class Game:
             else:
                 print("stand\n")
 
-    def decision(self, player, house, bet):
+    def decision(self, player, house):
         print(f"You have a total of {player.total}\n")
         time.sleep(2)
 
         if player.total < 21 and player.num_of_cards == 5 and house.num_of_cards!= 5:
             print("You Win! (five card rule)\n")
-            player.win_amount(bet)
+            player.win_amount(self.__current_bet)
         elif house.total < 21 and house.num_of_cards == 5 and player.num_of_cards!= 5:
             print("You Lose (five card rule)\n")
-            player.lose_amount(bet)
+            player.lose_amount(self.__current_bet)
         else:
             if player.total == 21 and player.num_of_cards == 2:
                 if house.total!= 21 or house.num_of_cards > 2:
                     print("You have a Blackjack!\nYou Win!\n")
-                    player.win_amount(math.ceil(bet * 1.5))
+                    player.win_amount(math.ceil(self.__current_bet * 1.5))
                 else:
                     print("Draw\n")
             elif house.total == 21 and house.num_of_cards == 2:
                 print("The House has a Blackjack!\nYou Lose\n")
-                player.lose_amount(bet)
+                player.lose_amount(self.__current_bet)
             else:
                 if player.total > 21:
                     print("You are over!")
@@ -194,24 +228,24 @@ class Game:
                     print("Draw\n")
                 elif player.total > 21 and house.total <= 21:
                     print("You Lose\n")
-                    player.lose_amount(bet)
+                    player.lose_amount(self.__current_bet)
                 elif house.total > 21 and player.total <= 21:
                     print("You Win!\n")
-                    player.win_amount(bet)
+                    player.win_amount(self.__current_bet)
                 elif house.total <= 21 and player.total <= 21:
                     if house.total < player.total:
                         print("You Win!\n")
-                        player.win_amount(bet)
+                        player.win_amount(self.__current_bet)
                     elif house.total > player.total:
                         print("You Lose\n")
-                        player.lose_amount(bet);
+                        player.lose_amount(self.__current_bet)
                     else:
                         if player.num_of_cards < house.num_of_cards:
                             print("You Win! (Fewer Cards)\n")
-                            player.win_amount(bet)
+                            player.win_amount(self.__current_bet)
                         elif player.num_of_cards > house.num_of_cards:
                             print("You Lose (House has fewer cards)\n")
-                            player.lose_amount(bet)
+                            player.lose_amount(self.__current_bet)
                         else:
                             print("Draw\n")
 
@@ -219,8 +253,3 @@ class Game:
         player.reset_hand()
         house.reset_hand()
         # No need to reset bet here, as it's passed by value
-
-    def go_play(self):
-        go = input("Would you like to continue (y/n)? ")
-        print("\033c", end="")  # Clear screen
-        return go.lower() == 'y'  # Return True if the player wants to continue, False otherwise

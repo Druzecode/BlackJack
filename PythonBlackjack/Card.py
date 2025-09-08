@@ -95,33 +95,33 @@ class Card:
 
     def get_display_rank(self):  # returns the display value of a card
         if self.rank == self.Rank.ACE:
-            return "A "
+            return "A"
         elif self.rank == self.Rank.TWO:
-            return "2 "
+            return "2"
         elif self.rank == self.Rank.THREE:
-            return "3 "
+            return "3"
         elif self.rank == self.Rank.FOUR:
-            return "4 "
+            return "4"
         elif self.rank == self.Rank.FIVE:
-            return "5 "
+            return "5"
         elif self.rank == self.Rank.SIX:
-            return "6 "
+            return "6"
         elif self.rank == self.Rank.SEVEN:
-            return "7 "
+            return "7"
         elif self.rank == self.Rank.EIGHT:
-            return "8 "
+            return "8"
         elif self.rank == self.Rank.NINE:
-            return "9 "
+            return "9"
         elif self.rank == self.Rank.TEN:
-            return "10"
+            return "T"
         elif self.rank == self.Rank.JACK:
-            return "J "
+            return "J"
         elif self.rank == self.Rank.QUEEN:
-            return "Q "
+            return "Q"
         elif self.rank == self.Rank.KING:
-            return "K "
+            return "K"
         else:
-            return "  "
+            return " "
 
     def get_display_suit(self):
         if self.suit == self.Suit.HEARTS:

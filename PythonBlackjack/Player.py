@@ -3,7 +3,7 @@ class Player:
         if(isinstance(name, str) and len(name) > 0):
             self.__name = name
         else:
-            self.__name = input("Enter your player's name: ") or "Player1"
+            self.__name = input("Enter your name: ") or "Player1"
         
         self.__hand =  [] # Initialize an empty list to hold Card objects
         if(starting_amount != None and isinstance(starting_amount, int) and starting_amount > 0):
