@@ -231,12 +231,12 @@ class Game:
         if self._house.total > player.total:
             print("You Lose")
             return (self.__current_bet * -1)
-        if self._house.total == player.total and player.num_of_cards < self._house.num_of_cards:
-            print("You Win! (Fewer Cards)")
-            return self.__current_bet
-        if self._house.total == player.total and player.num_of_cards > self._house.num_of_cards:
-            print("You Lose (House has fewer cards)")
-            return (self.__current_bet * -1)
+        # if self._house.total == player.total and player.num_of_cards < self._house.num_of_cards:
+        #     print("You Win! (Fewer Cards)")
+        #     return self.__current_bet
+        # if self._house.total == player.total and player.num_of_cards > self._house.num_of_cards:
+        #     print("You Lose (House has fewer cards)")
+        #     return (self.__current_bet * -1)
         if self._house.total == player.total:
             print("Draw")
             return 0
