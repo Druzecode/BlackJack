@@ -30,8 +30,8 @@ def main():
     deck.shuffle()
     game = Game(game_display=display, deck=deck)
 
-    deck.cards[0] = Card(Card.Suit.SPADES, Card.Rank.FIVE)
-    deck.cards[1] = Card(Card.Suit.SPADES, Card.Rank.SIX)
+    #deck.cards[0] = Card(Card.Suit.SPADES, Card.Rank.FIVE)
+    #deck.cards[1] = Card(Card.Suit.SPADES, Card.Rank.SIX)
     game.play()
 
 if __name__ == "__main__":
