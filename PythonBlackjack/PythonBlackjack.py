@@ -24,20 +24,15 @@ def main():
 
     print(f"Columns: {columns}, Rows: {rows}")
 
-
-    display = GameDisplay()
-    display.ShowIntro()
-    
+    display = GameDisplayTI()
+    display.show_intro()
     deck = Deck()
     deck.shuffle()
-    player = Player()
-    house = Player("The House", starting_amount=0)
-    game = Game()
+    game = Game(game_display=display, deck=deck)
 
-    game.play(deck, player, house)
-
-    print(f"Your final total was: ${player.money}")
-    print("Thanks for playing\n")
+    deck.cards[0] = Card(Card.Suit.SPADES, Card.Rank.FIVE)
+    deck.cards[1] = Card(Card.Suit.SPADES, Card.Rank.SIX)
+    game.play()
 
 if __name__ == "__main__":
     main()

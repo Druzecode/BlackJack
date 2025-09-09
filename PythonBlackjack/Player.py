@@ -50,6 +50,9 @@ class Player:
     def reset_hand(self):
         self.__hand = []
     
+    def settle_bet(self, bet):
+        self.__money += bet
+
     def win_amount(self, bet):
         self.__money += bet
     

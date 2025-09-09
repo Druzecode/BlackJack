@@ -3,16 +3,16 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import pytest
+from Game import Game
 from Player import Player
-from Deck import Deck
-from Card import Card
+
 
 @pytest.mark.parametrize("input", [
     ("test"),
     ("Player1"),
     ("")
 ])
-def test_player_default_initialization(monkeypatch, input):
+def test_show_intro(monkeypatch, input):
     monkeypatch.setattr('builtins.input', lambda _: input)
     player = Player()
     if(input != None and len(input) > 0 ):
@@ -23,39 +23,3 @@ def test_player_default_initialization(monkeypatch, input):
     assert player.num_of_cards == 0
     assert player.hand == []
 
-def PrintGame(self, player, house, bet, initial_deal=False):
-    print("\033c", end="")  # Clear screen
-    bet_str = f"Bet: ${bet}"
-    print(bet_str, end="")
-    money = f" (${player.money})"
-    for _ in range(16-len(bet_str)-len(money)):
-        print(" ", end="")
-    print(money)
-
-    #Draw player cards
-    for card in player.hand:
-        print (f"|{card.get_display_rank()}| ", end="")
-    print("")
-    for card in player.hand:
-        print (f"|{card.get_display_suit()}| ", end="")
-    print("")
-    print(f"{player.name}: {player.total}\n")
-
-    #Draw house cards
-    if house.num_of_cards > 0:
-        for card in house.hand:
-            if(initial_deal and card == house.hand[1]):
-                print ("|?| ", end="")
-            else:
-                print (f"|{card.get_display_rank()}| ", end="")
-        print("")
-        for card in house.hand:
-            if(initial_deal and card == house.hand[1]):
-                print ("|?| ", end="")
-            else:
-                print (f"|{card.get_display_suit()}| ", end="")
-        print("")
-        if initial_deal:
-            print(f"{house.name}: ??\n")
-        else:
-            print(f"{house.name}: {house.total}\n")

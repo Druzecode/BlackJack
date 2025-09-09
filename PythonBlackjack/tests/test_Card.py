@@ -94,11 +94,3 @@ def test_display_card_as_text():
     print("\n")
     Card().display_card_as_text()  # just ensure no errors are raised
 
-def test_draw_back():
-    print("\n")
-    Card().draw_back()  # just ensure no errors are raised
-
-def test_draw_card():
-    print("\n")
-    Card().draw_card()  # just ensure no errors are raised
-

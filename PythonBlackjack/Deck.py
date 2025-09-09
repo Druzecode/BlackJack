@@ -25,15 +25,6 @@ class Deck:
         random.shuffle(self.__cards)  # Use Python's built-in shuffle function
         self.__position = 0  # resets the pointer to the start of the deck
 
-    def display(self, draw_cards=False):  # displays all of the cards in the deck
-        for card in self.__cards:
-            if draw_cards:
-                card.draw_card()
-            else:
-                card.display_card_as_text()
-            print()
-        print("\n\n")
-
     def get_top_card(self):  # returns the "top" card on the deck
         self.__position += 1  # points to next card
         if(self.__position > len(self.__cards)):

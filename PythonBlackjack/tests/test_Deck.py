@@ -30,14 +30,6 @@ def test_deck_position():
     deck.shuffle()
     assert deck.cards != cards1  # After shuffle, order should be different
 
-@pytest.mark.parametrize("draw", [
-    True,
-    False
-])
-def test_deck_display(draw):
-    deck = Deck()
-    deck.display(draw)  # Just ensure it runs without error
-
 @pytest.mark.parametrize("iterations", [
     (1),
     (10),
@@ -45,7 +37,7 @@ def test_deck_display(draw):
     (53),
     (100)
 ])
-def test_deck_draw_card(iterations):
+def test_deck_multiple_shuffles(iterations):
     deck = Deck()
     deck.shuffle()
     drawn_cards = []

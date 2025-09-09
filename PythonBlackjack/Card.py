@@ -1,5 +1,4 @@
 from enum import Enum
-from CardRender import CardRender
 
 class Card:
     class Suit(Enum):
@@ -32,7 +31,6 @@ class Card:
         return self.__rank
 
     def __init__(self, suit=None, rank=None):
-        self._renderer = CardRender()
         if(suit is None):
             suit = self.Suit.HEARTS
         if(rank is None):    
@@ -93,35 +91,35 @@ class Card:
         else:
             return 0
 
-    def get_display_rank(self):  # returns the display value of a card
+    def get_display_rank(self, short=False):  # returns the display value of a card
         if self.rank == self.Rank.ACE:
-            return "A"
+            return "A" if short else "A "
         elif self.rank == self.Rank.TWO:
-            return "2"
+            return "2" if short else "2 "
         elif self.rank == self.Rank.THREE:
-            return "3"
+            return "3" if short else "3 "
         elif self.rank == self.Rank.FOUR:
-            return "4"
+            return "4" if short else "4 "
         elif self.rank == self.Rank.FIVE:
-            return "5"
+            return "5" if short else "5 "
         elif self.rank == self.Rank.SIX:
-            return "6"
+            return "6" if short else "6 "
         elif self.rank == self.Rank.SEVEN:
-            return "7"
+            return "7" if short else "7 "
         elif self.rank == self.Rank.EIGHT:
-            return "8"
+            return "8" if short else "8 "
         elif self.rank == self.Rank.NINE:
-            return "9"
+            return "9" if short else "9 "
         elif self.rank == self.Rank.TEN:
-            return "T"
+            return "T" if short else "10"
         elif self.rank == self.Rank.JACK:
-            return "J"
+            return "J" if short else "J "
         elif self.rank == self.Rank.QUEEN:
-            return "Q"
+            return "Q" if short else "Q "
         elif self.rank == self.Rank.KING:
-            return "K"
+            return "K" if short else "K "
         else:
-            return " "
+            return " " if short else "  "
 
     def get_display_suit(self):
         if self.suit == self.Suit.HEARTS:
@@ -134,9 +132,3 @@ class Card:
             return '\u2660'
         else:
             return ' '
-
-    def draw_back(self):  # draws the back of a card (for hold cards)
-        self._renderer.draw_back(self)
-
-    def draw_card(self):  # draws a specific card's picture
-        self._renderer.draw_card(self)
