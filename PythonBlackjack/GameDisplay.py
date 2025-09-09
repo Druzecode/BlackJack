@@ -25,7 +25,7 @@ class GameDisplay:
             print("\u2665 ", end="", flush=True)
         print("\n")
 
-    def print_game(self, player, house, bet, hole_card=False):
+    def print_game(self, player, house=None, bet=None, hole_card=False):
         print("\033c", end="")  # Clear screen
         bet_str = f"Bet: ${bet}"
         print(bet_str, end="")
@@ -34,51 +34,93 @@ class GameDisplay:
             print(" ", end="")
         print(money)
 
+        #Draw player cards
         for card in player.hand:
-            self.draw_card(card)
+            print("┌───────┐", end="")
+        print("")
+        for card in player.hand:
+            print (f"│ {card.get_display_rank()}    │", end="")
+        print("")
+        for card in player.hand:
+            print ("│       │", end="")
+        print("")
+        for card in player.hand:
+            print (f"│   {card.get_display_suit()}   │", end="")
+        print("")
+        for card in player.hand:
+            print ("│       │", end="")
+        print("")
+        for card in player.hand:
+            print (f"│     {card.get_display_rank()}│", end="")
+        print("")
+        for card in player.hand:
+            print("└───────┘", end="")
         print("")
         print(f"{player.name}: {player.total}\n")
 
-        if house.num_of_cards > 0:
+        #Draw house cards
+        if house != None and house.num_of_cards > 0:
             for card in house.hand:
-                if(hole_card and card == house.hand[1]):
-                    self.draw_back(card)
+                print("┌───────┐", end="")
+            print("")
+            for card in house.hand:
+                if(hole_card and len(house.hand) > 1 and card == house.hand[1]):
+                    print ("│*******│", end="")
                 else:
-                    self.draw_card(card)
+                    print (f"│ {card.get_display_rank()}    │", end="")
+            print("")
+            for card in house.hand:
+                if(hole_card and len(house.hand) > 1 and card == house.hand[1]):
+                    print ("│*******│", end="")
+                else:
+                    print ("│       │", end="")
+            print("")
+            for card in house.hand:
+                if(hole_card and len(house.hand) > 1 and card == house.hand[1]):
+                    print ("│*******│", end="")
+                else:
+                    print (f"│   {card.get_display_suit()}   │", end="")
+            print("")
+            for card in house.hand:
+                if(hole_card and len(house.hand) > 1 and card == house.hand[1]):
+                    print ("│*******│", end="")
+                else:
+                    print ("│       │", end="")
+            print("")
+            for card in house.hand:
+                if(hole_card and len(house.hand) > 1 and card == house.hand[1]):
+                    print ("│*******│", end="")
+                else:
+                    print (f"│     {card.get_display_rank()}│", end="")
+            print("")
+            for card in house.hand:
+                print("└───────┘", end="")
             print("")
             if hole_card:
-                print(f"{house.name}: ??\n")
+                print(f"{house.name} showing {house.hand[0].get_display_rank()}\n")
             else:
                 print(f"{house.name}: {house.total}\n")
 
     def draw_back(self, card):  # draws the back of a card (for hold cards)
-        print("\t┌───────────┐")
-        print("\t│***********│")
-        print("\t│***********│")
-        print("\t│***********│")
-        print("\t│***********│")
-        print("\t│***********│")
-        print("\t│***********│")
-        print("\t│***********│")
-        print("\t│***********│")
-        print("\t│***********│")
-        print("\t└───────────┘")
+        print("\t┌───────┐")
+        print("\t│*******│")
+        print("\t│*******│")
+        print("\t│*******│")
+        print("\t│*******│")
+        print("\t│*******│")
+        print("\t└───────┘")
 
         print("\tHold Card")
         print("\n")
 
     def draw_card(self, card):  # draws a specific card's picture
-        print("\t┌───────────┐")
-        print(f"\t│ {card.get_display_rank()}        │")
+        print("\t┌───────┐")
+        print(f"\t│ {card.get_display_rank()}    │")
         print("\t│           │")
+        print(f"\t│   {card.get_display_suit()}    │")
         print("\t│           │")
-        print("\t│           │")
-        print(f"\t│     {card.get_display_suit()}     │")
-        print("\t│           │")
-        print("\t│           │")
-        print("\t│           │")
-        print(f"\t│        {card.get_display_rank()} │")
-        print("\t└───────────┘")
+        print(f"\t│    {card.get_display_rank()} │")
+        print("\t└───────┘")
 
         print("\t", end="")
         card.display_card_as_text()

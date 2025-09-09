@@ -22,9 +22,9 @@ def main():
         columns = 80  # default width
         rows = 24     # default height
 
-    print(f"Columns: {columns}, Rows: {rows}")
+    #print(f"Columns: {columns}, Rows: {rows}")
 
-    display = GameDisplayTI()
+    display = GameDisplayTI() if columns < 20 else GameDisplay()
     display.show_intro()
     deck = Deck()
     deck.shuffle()

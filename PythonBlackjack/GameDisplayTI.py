@@ -82,8 +82,7 @@ class GameDisplayTI(GameDisplay):
                 print(f"{house.name} showing {house.hand[0].get_display_rank()}\n")
             else:
                 print(f"{house.name}: {house.total}\n")
-        
-    
+  
     def draw_back(self, card):  # draws the back of a card (for hold cards)
         print("\t┌──┐")
         print("\t│**│")
