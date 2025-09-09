@@ -193,12 +193,12 @@ class Game:
     def decision(self, player):
         time.sleep(.5)
 
-        if player.total <= 21 and player.num_of_cards == 5 and self._house.num_of_cards!= 5:
-            print("You Win! (five card rule)")
-            return self.__current_bet
-        if self._house.total <= 21 and self._house.num_of_cards == 5 and player.num_of_cards!= 5:
-            print("You Lose (five card rule)")
-            return (self.__current_bet * -1)
+        # if player.total <= 21 and player.num_of_cards == 5 and self._house.num_of_cards!= 5:
+        #     print("You Win! (five card rule)")
+        #     return self.__current_bet
+        # if self._house.total <= 21 and self._house.num_of_cards == 5 and player.num_of_cards!= 5:
+        #     print("You Lose (five card rule)")
+        #     return (self.__current_bet * -1)
         if player.total == 21 and player.num_of_cards == 2:
             if self._house.total == 21 and self._house.num_of_cards == 2:
                 print("Draw")

@@ -24,7 +24,7 @@ def main():
 
     #print(f"Columns: {columns}, Rows: {rows}")
 
-    display = GameDisplayTI() if columns < 20 else GameDisplay()
+    display = GameDisplayTI() if columns < 50 else GameDisplay()
     display.show_intro()
     deck = Deck()
     deck.shuffle()
