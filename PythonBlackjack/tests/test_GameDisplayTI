@@ -2,24 +2,10 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-import pytest
-from Game import Game
-from Player import Player
+from GameDisplayTI import GameDisplayTI
 
 
-@pytest.mark.parametrize("input", [
-    ("test"),
-    ("Player1"),
-    ("")
-])
 def test_show_intro(monkeypatch, input):
-    monkeypatch.setattr('builtins.input', lambda _: input)
-    player = Player()
-    if(input != None and len(input) > 0 ):
-        assert player.name == input
-    else:
-        assert player.name == "Player1"
-    assert player.money == 100
-    assert player.num_of_cards == 0
-    assert player.hand == []
-
+    display = GameDisplayTI()
+    display.show_intro()
+    # No assertions, just ensure it runs without error

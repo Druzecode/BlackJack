@@ -25,24 +25,22 @@ def test_game_initialization():
     ("100", 101, False),
 ])
 def test_validate_bet(balance, amount, expected):
-    game = Game()
     player = Player("TestPlayer", balance)
-    actual = game._validate_bet(amount, player)
+    game = Game(player=player)
+    actual = game._validate_bet(amount)
     assert actual == expected
 
 def test_game_bet(monkeypatch):
     game = Game()
-    player = Player("TestPlayer", 100)
     monkeypatch.setattr('builtins.input', lambda _: "11")
-    bet = game.bet(player)
+    bet = game.bet()
     assert bet == 11
 
 def test_game_deal():
-    game = Game()
-    player = Player("TestPlayer", 100)
+    player = Player("TestPlayer")
     deck = Deck()
-    deck.shuffle()
-    game.deal(player, deck, False)
+    game = Game(player=player, deck=deck)  #init includes deck shuffle
+    game.deal()
     assert player.num_of_cards == 2 
     assert player.hand[0] == deck.cards[0]
     assert player.hand[1] == deck.cards[1]

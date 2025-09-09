@@ -7,16 +7,16 @@ from Player import Player
 from Deck import Deck
 from Card import Card
 
-@pytest.mark.parametrize("input", [
+@pytest.mark.parametrize("name", [
     ("test"),
     ("Player1"),
-    ("")
+    (""),
+    (None)
 ])
-def test_player_default_initialization(monkeypatch, input):
-    monkeypatch.setattr('builtins.input', lambda _: input)
-    player = Player()
-    if(input != None and len(input) > 0 ):
-        assert player.name == input
+def test_player_default_initialization(name):
+    player = Player(name)
+    if(name != None and len(name) > 0 ):
+        assert player.name == name
     else:
         assert player.name == "Player1"
     assert player.money == 100
@@ -51,7 +51,6 @@ def test_player_hand():
     assert player.num_of_cards == 2
     assert player.hand[1] == deck.cards[1]
     
-    player.display_cards()  # Just ensure it runs without error
     player.reset_hand()
     assert player.num_of_cards == 0
 
