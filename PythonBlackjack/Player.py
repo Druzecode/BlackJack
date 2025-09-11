@@ -34,7 +34,7 @@ class Player:
             total += c.get_value(False) # get the total, counting all ACES as 11
         if total > 21:
             for c in self.__hand: #one at a time, switch an ace from an 11 to a 1 until
-                if c.rank == c.Rank.ACE: 
+                if c.rank == 0: #ACE
                     total -= 10
                     if total <= 21:
                         break

@@ -64,18 +64,18 @@ def test_player_money():
     assert player.money == 125
 
 @pytest.mark.parametrize("cards, expected", [
-    ([Card.Rank.ACE, Card.Rank.KING], 21),
-    ([Card.Rank.ACE, Card.Rank.KING, Card.Rank.TEN], 21),
-    ([Card.Rank.ACE, Card.Rank.KING, Card.Rank.TEN, Card.Rank.FIVE], 26),
-    ([Card.Rank.ACE, Card.Rank.EIGHT, Card.Rank.ACE], 20),
-    ([Card.Rank.ACE, Card.Rank.NINE, Card.Rank.ACE], 21),
-    ([Card.Rank.TEN, Card.Rank.ACE, Card.Rank.ACE], 12),
-    ([Card.Rank.ACE, Card.Rank.TEN, Card.Rank.ACE], 12),
-    ([Card.Rank.ACE, Card.Rank.ACE, Card.Rank.TEN], 12),
-    ([Card.Rank.ACE, Card.Rank.ACE], 12),
-    ([Card.Rank.ACE, Card.Rank.ACE, Card.Rank.ACE, Card.Rank.ACE], 14),
-    ([Card.Rank.QUEEN, Card.Rank.ACE, Card.Rank.ACE, Card.Rank.ACE, Card.Rank.ACE,], 14),
-    ([Card.Rank.QUEEN, Card.Rank.JACK, Card.Rank.ACE, Card.Rank.ACE, Card.Rank.ACE,], 23)
+    (["ACE", "KING"], 21),
+    (["ACE", "KING", "TEN"], 21),
+    (["ACE", "KING", "TEN", "FIVE"], 26),
+    (["ACE", "EIGHT", "ACE"], 20),
+    (["ACE", "NINE", "ACE"], 21),
+    (["TEN", "ACE", "ACE"], 12),
+    (["ACE", "TEN", "ACE"], 12),
+    (["ACE", "ACE", "TEN"], 12),
+    (["ACE", "ACE"], 12),
+    (["ACE", "ACE", "ACE", "ACE"], 14),
+    (["QUEEN", "ACE", "ACE", "ACE", "ACE"], 14),
+    (["QUEEN", "JACK", "ACE", "ACE", "ACE"], 23)
 ])
 def test_player_total(cards, expected):
     player = Player("Player1")

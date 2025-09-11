@@ -8,7 +8,7 @@ class Deck:
         self.__position = 0  # beginning of deck
         count =0
         for suit in range(0, 4):
-            for rank in range(1, 14):
+            for rank in range(0, 13):
                 card = Card(suit, rank)
                 self.__cards.append(card)
                 count = count + 1
@@ -36,7 +36,7 @@ class Deck:
             return False
         seen = set()
         for card in self.__cards:
-            combo = (card.suit, card.rank.value)
+            combo = (card.suit, card.rank)
             if combo in seen:
                 return False
             seen.add(combo)

@@ -1,5 +1,3 @@
-from enum import Enum
-
 class Card:
     Suit = [
         "HEARTS",
@@ -8,20 +6,21 @@ class Card:
         "SPADES"
     ]
 
-    class Rank (Enum):
-        ACE = 1
-        TWO = 2
-        THREE = 3
-        FOUR = 4
-        FIVE = 5
-        SIX = 6
-        SEVEN = 7
-        EIGHT = 8
-        NINE = 9
-        TEN = 10
-        JACK = 11
-        QUEEN = 12
-        KING = 13
+    Rank = [
+        "ACE",
+        "TWO",
+        "THREE",
+        "FOUR",
+        "FIVE",
+        "SIX",
+        "SEVEN",
+        "EIGHT",
+        "NINE",
+        "TEN",
+        "JACK",
+        "QUEEN",
+        "KING"
+    ]
 
     @property
     def suit(self):
@@ -32,13 +31,12 @@ class Card:
         return self.__rank
 
     def __init__(self, suit=None, rank=None):
-        if(suit is None):
-            suit = 0 # default to hearts
-        if(rank is None):    
-            rank = self.Rank.ACE
-        
+        if suit is None:
+            suit = 0  # default to hearts
+        if rank is None:
+            rank = 0  # default to ACE (index 0)
         self.__set_suit(suit)
-        self.__set_rank(rank) 
+        self.__set_rank(rank)
 
     def get_suit_index(self, value):
         if isinstance(value, str):
@@ -48,79 +46,46 @@ class Card:
         else:
             raise ValueError("Suit must be an integer between 1 and 4 or a valid suit name")
 
+    def get_rank_index(self, value):
+        if isinstance(value, str):
+            return self.Rank.index(value.upper())
+        elif isinstance(value, int) and 0 <= value < 13:
+            return value
+        else:
+            raise ValueError("Rank must be an integer between 0 and 12 or a valid rank name")
+
     def __set_suit(self, x):  # sets a card's suit
         self.__suit = self.get_suit_index(x)
 
-    def __set_rank(self, x):  # sets a card's rank
-        if isinstance(x, self.Rank):
-            self.__rank = x
-        elif isinstance(x, str):
-            self.__rank = self.Rank[x.upper()]
-        else:
-            self.__rank = self.Rank(x)
+    def __set_rank(self, x):
+        self.__rank = self.get_rank_index(x)
 
     def display_card_as_text(self):  # displays a card in text
-        print(f"{self.__rank.name} of {self.Suit[self.__suit]}")
+        print(f"{self.Rank[self.__rank]} of {self.Suit[self.__suit]}")
 
     def get_value(self, flag):  # returns the value of a card
-        if self.rank == self.Rank.ACE:
-            if flag:  # flag is true if total is over 21, and an Ace must be counted as a 1
-                return 1
-            else:
-                return 11  # by default, aces are counted as 11 originally
-        elif self.rank == self.Rank.TWO:
-            return 2
-        elif self.rank == self.Rank.THREE:
-            return 3
-        elif self.rank == self.Rank.FOUR:
-            return 4
-        elif self.rank == self.Rank.FIVE:
-            return 5
-        elif self.rank == self.Rank.SIX:
-            return 6
-        elif self.rank == self.Rank.SEVEN:
-            return 7
-        elif self.rank == self.Rank.EIGHT:
-            return 8
-        elif self.rank == self.Rank.NINE:
-            return 9
-        elif self.rank == self.Rank.TEN:
-            return 10
-        elif self.rank == self.Rank.JACK:
-            return 10
-        elif self.rank == self.Rank.QUEEN:
-            return 10
-        elif self.rank == self.Rank.KING:
+        # Returns the value of a card
+        if self.rank == 0:  # ACE
+            return 1 if flag else 11
+        elif 1 <= self.rank <= 8:  # TWO to NINE
+            return self.rank + 1
+        elif 9 <= self.rank <= 12:  # TEN, JACK, QUEEN, KING
             return 10
         else:
             return 0
 
     def get_display_rank(self, short=False):  # returns the display value of a card
-        if self.rank == self.Rank.ACE:
+        if self.rank == 0:
             return "A" if short else "A "
-        elif self.rank == self.Rank.TWO:
-            return "2" if short else "2 "
-        elif self.rank == self.Rank.THREE:
-            return "3" if short else "3 "
-        elif self.rank == self.Rank.FOUR:
-            return "4" if short else "4 "
-        elif self.rank == self.Rank.FIVE:
-            return "5" if short else "5 "
-        elif self.rank == self.Rank.SIX:
-            return "6" if short else "6 "
-        elif self.rank == self.Rank.SEVEN:
-            return "7" if short else "7 "
-        elif self.rank == self.Rank.EIGHT:
-            return "8" if short else "8 "
-        elif self.rank == self.Rank.NINE:
-            return "9" if short else "9 "
-        elif self.rank == self.Rank.TEN:
+        elif 1 <= self.rank <= 8:
+            return str(self.rank + 1) if short else f"{self.rank + 1} "
+        elif self.rank == 9:
             return "T" if short else "10"
-        elif self.rank == self.Rank.JACK:
+        elif self.rank == 10:
             return "J" if short else "J "
-        elif self.rank == self.Rank.QUEEN:
+        elif self.rank == 11:
             return "Q" if short else "Q "
-        elif self.rank == self.Rank.KING:
+        elif self.rank == 12:
             return "K" if short else "K "
         else:
             return " " if short else "  "
