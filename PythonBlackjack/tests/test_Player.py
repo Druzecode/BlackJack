@@ -13,7 +13,8 @@ from Card import Card
     (""),
     (None)
 ])
-def test_player_default_initialization(name):
+def test_player_default_initialization(monkeypatch, name):
+    monkeypatch.setattr('builtins.input', lambda _: "Player1")
     player = Player(name)
     if(name != None and len(name) > 0 ):
         assert player.name == name

@@ -1,14 +1,7 @@
-import os
-
-def is_test():
-    return "PYTEST_CURRENT_TEST" in os.environ
-
 class Player:
     def __init__(self, name=None, starting_amount=None):
         if(isinstance(name, str) and len(name) > 0):
             self.__name = name
-        elif is_test():
-            self.__name = "Player1"
         else:
             self.__name = input("Enter your name: ") or "Player1"
         

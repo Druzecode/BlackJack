@@ -7,7 +7,8 @@ from Game import Game
 from Player import Player
 from Deck import Deck
 
-def test_game_initialization():
+def test_game_initialization(monkeypatch):
+    monkeypatch.setattr('builtins.input', lambda _: "TestPlayer")
     game = Game()
     assert game.min_bet == 5
 
@@ -31,6 +32,7 @@ def test_validate_bet(balance, amount, expected):
     assert actual == expected
 
 def test_game_bet(monkeypatch):
+    monkeypatch.setattr('builtins.input', lambda _: "Player")
     game = Game()
     monkeypatch.setattr('builtins.input', lambda _: "11")
     bet = game.bet()
