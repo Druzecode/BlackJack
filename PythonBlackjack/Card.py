@@ -1,11 +1,12 @@
 from enum import Enum
 
 class Card:
-    class Suit(Enum):
-        HEARTS = 1
-        DIAMONDS = 2
-        CLUBS = 3
-        SPADES = 4
+    Suit = [
+        "HEARTS",
+        "DIAMONDS",
+        "CLUBS",
+        "SPADES"
+    ]
 
     class Rank (Enum):
         ACE = 1
@@ -32,20 +33,23 @@ class Card:
 
     def __init__(self, suit=None, rank=None):
         if(suit is None):
-            suit = self.Suit.HEARTS
+            suit = 0 # default to hearts
         if(rank is None):    
             rank = self.Rank.ACE
         
         self.__set_suit(suit)
         self.__set_rank(rank) 
-    
-    def __set_suit(self, x):  # sets a card's suit
-        if isinstance(x, self.Suit):
-            self.__suit = x
-        elif isinstance(x, str):
-            self.__suit = self.Suit[x.upper()]
+
+    def get_suit_index(self, value):
+        if isinstance(value, str):
+            return self.Suit.index(value.upper())
+        elif isinstance(value, int) and value >= 0 and value < 4:
+            return value
         else:
-            self.__suit = self.Suit(x)
+            raise ValueError("Suit must be an integer between 1 and 4 or a valid suit name")
+
+    def __set_suit(self, x):  # sets a card's suit
+        self.__suit = self.get_suit_index(x)
 
     def __set_rank(self, x):  # sets a card's rank
         if isinstance(x, self.Rank):
@@ -56,7 +60,7 @@ class Card:
             self.__rank = self.Rank(x)
 
     def display_card_as_text(self):  # displays a card in text
-        print(f"{self.__rank.name} of {self.__suit.name}")
+        print(f"{self.__rank.name} of {self.Suit[self.__suit]}")
 
     def get_value(self, flag):  # returns the value of a card
         if self.rank == self.Rank.ACE:
@@ -122,13 +126,13 @@ class Card:
             return " " if short else "  "
 
     def get_display_suit(self):
-        if self.suit == self.Suit.HEARTS:
+        if self.suit == self.Suit.index("HEARTS"):
             return '\u2665'
-        if self.suit == self.Suit.DIAMONDS:
+        if self.suit == self.Suit.index("DIAMONDS"):
             return '\u2666'
-        if self.suit == self.Suit.CLUBS:
+        if self.suit == self.Suit.index("CLUBS"):
             return '\u2663'
-        if self.suit == self.Suit.SPADES:
+        if self.suit == self.Suit.index("SPADES"):
             return '\u2660'
         else:
             return ' '

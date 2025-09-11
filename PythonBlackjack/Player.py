@@ -36,15 +36,19 @@ class Player:
     
     @property
     def total(self):
-        total = self.total_with_ace(False)
-        if(total > 21):
-            total = self.total_with_ace(True)
+        total = self.total_with_ace() # get the total, counting all ACES as 11
+        if total > 21:
+            for c in self.__hand: #one at a time, switch an ace from an 11 to a 1 until
+                if c.rank == c.Rank.ACE: 
+                    total -= 10
+                    if total <= 21:
+                        break
         return total
 
-    def total_with_ace(self, flag):
+    def total_with_ace(self):
         total = 0
         for c in self.__hand:
-            total += c.get_value(flag)
+            total += c.get_value(False)
         return total
 
     def get_card(self, card):
