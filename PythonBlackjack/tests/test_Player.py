@@ -62,13 +62,23 @@ def test_player_money():
     player.lose_amount(25);
     assert player.money == 125
 
-def test_player_total():
+@pytest.mark.parametrize("cards, expected", [
+    ([Card.Rank.ACE, Card.Rank.KING], 21),
+    ([Card.Rank.ACE, Card.Rank.KING, Card.Rank.TEN], 21),
+    ([Card.Rank.ACE, Card.Rank.KING, Card.Rank.TEN, Card.Rank.FIVE], 26),
+    ([Card.Rank.ACE, Card.Rank.EIGHT, Card.Rank.ACE], 20),
+    ([Card.Rank.ACE, Card.Rank.NINE, Card.Rank.ACE], 21),
+    ([Card.Rank.TEN, Card.Rank.ACE, Card.Rank.ACE], 12),
+    ([Card.Rank.ACE, Card.Rank.TEN, Card.Rank.ACE], 12),
+    ([Card.Rank.ACE, Card.Rank.ACE, Card.Rank.TEN], 12),
+    ([Card.Rank.ACE, Card.Rank.ACE], 12),
+    ([Card.Rank.ACE, Card.Rank.ACE, Card.Rank.ACE, Card.Rank.ACE], 14),
+    ([Card.Rank.QUEEN, Card.Rank.ACE, Card.Rank.ACE, Card.Rank.ACE, Card.Rank.ACE,], 14),
+    ([Card.Rank.QUEEN, Card.Rank.JACK, Card.Rank.ACE, Card.Rank.ACE, Card.Rank.ACE,], 23)
+])
+def test_player_total(cards, expected):
     player = Player("Player1")
     deck = Deck()
-    player.get_card(Card(Card.Suit.DIAMONDS, Card.Rank.ACE))
-    player.get_card(Card(Card.Suit.DIAMONDS, Card.Rank.KING))
-    assert player.total == 21
-    player.get_card(Card(Card.Suit.DIAMONDS, Card.Rank.TEN))
-    assert player.total == 21
-    player.get_card(Card(Card.Suit.DIAMONDS, Card.Rank.FIVE))
-    assert player.total == 26
+    for c in cards:
+        player.get_card(Card("CLUBS", c))
+    assert player.total == expected
