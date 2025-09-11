@@ -2,10 +2,10 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from GameDisplayTI import GameDisplayTI
+from DispSm import DispSm
 
 
 def test_show_intro(monkeypatch, input):
-    display = GameDisplayTI()
+    display = DispSm()
     display.show_intro()
     # No assertions, just ensure it runs without error

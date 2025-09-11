@@ -1,14 +1,14 @@
 
 import random
 import time
-import os
+#import os
 
 from Card import Card
 from Deck import Deck
 from Game import Game
 from Player import Player
-from GameDisplay import GameDisplay
-from GameDisplayTI import GameDisplayTI
+from DispLg import DispLg
+from DispSm import DispSm
 
 
 
@@ -24,14 +24,14 @@ def main():
 
     #print(f"Columns: {columns}, Rows: {rows}")
 
-    display = GameDisplayTI() if columns < 50 else GameDisplay()
+    display = DispSm() if columns < 50 else DispLg()
     display.show_intro()
     deck = Deck()
     deck.shuffle()
     game = Game(game_display=display, deck=deck)
 
-    #deck.cards[0] = Card(Card.Suit.SPADES, Card.Rank.FIVE)
-    #deck.cards[1] = Card(Card.Suit.SPADES, Card.Rank.SIX)
+    deck.cards[0] = Card(Card.Suit.SPADES, Card.Rank.FIVE)
+    deck.cards[1] = Card(Card.Suit.SPADES, Card.Rank.SIX)
     game.play()
 
 if __name__ == "__main__":

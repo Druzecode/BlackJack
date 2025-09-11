@@ -1,9 +1,7 @@
 import time
 
-from Player import Player
-from Card import Card
 
-class GameDisplay:
+class DispLg:
     def __init__(self):
         self.__min_bet = 5
     

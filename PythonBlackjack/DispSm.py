@@ -1,10 +1,8 @@
 import time
 
-from GameDisplay import GameDisplay
-from Player import Player
-from Card import Card
+from DispLg import DispLg
 
-class GameDisplayTI(GameDisplay):
+class DispSm(DispLg):
     def _print_symbols(self):
         for _ in range(4):
             time.sleep(0.02)

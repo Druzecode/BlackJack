@@ -4,7 +4,7 @@ import math
 
 from Player import Player
 from Deck import Deck
-from GameDisplay import GameDisplay
+from DispLg import DispLg
 
 class Game:
     def __init__(self, player=None, house=None, deck=None, game_display=None):
@@ -13,10 +13,10 @@ class Game:
         self._player = player if player is not None else Player()
         self._house = house if house is not None else Player("The House", starting_amount=0)
         self._deck = deck if deck is not None else Deck()
-        if(game_display != None and isinstance(game_display, GameDisplay)):
+        if(game_display != None and isinstance(game_display, DispLg)):
             self._game_display = game_display  
         else:
-            self._game_display = GameDisplay()
+            self._game_display = DispLg()
         self._deck.shuffle()
 
     @property
