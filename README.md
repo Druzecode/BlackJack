@@ -1,4 +1,4 @@
-**Blackjack**
+## Blackjack 
 
 This project started as a C project for a second-term, freshman C programming course in... well, a long time ago.  At some point, the original code was directly ported to C# to make it easier to run.
 
@@ -10,3 +10,13 @@ Recently, the game was ported to Python in an effort to run it on a TI-84 Plus C
 
 Run all tests: .\pytest 
 Run program: python .\PythonBlackjack.py
+
+**Build Executable using PyInstaller**
+
+1. Install the PyInstaller package
+
+    pip install pyinstaller
+
+2. Build the executable
+
+    pyinstaller --onefile BlkJack.py

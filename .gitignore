@@ -8,3 +8,6 @@
 /PythonBlackjack/tests/__pycache__
 /PythonBlackjack/venv
 settings.json
+PythonBlackjack/BlkJack.spec
+PythonBlackjack/build/
+PythonBlackjack/dist/
