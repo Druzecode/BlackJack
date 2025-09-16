@@ -1,27 +1,26 @@
+Suit = [
+    "HEARTS",
+    "DIAMONDS",
+    "CLUBS",
+    "SPADES"
+]
+
+Rank = [
+    "ACE",
+    "TWO",
+    "THREE",
+    "FOUR",
+    "FIVE",
+    "SIX",
+    "SEVEN",
+    "EIGHT",
+    "NINE",
+    "TEN",
+    "JACK",
+    "QUEEN",
+    "KING"
+]
 class Card:
-    Suit = [
-        "HEARTS",
-        "DIAMONDS",
-        "CLUBS",
-        "SPADES"
-    ]
-
-    Rank = [
-        "ACE",
-        "TWO",
-        "THREE",
-        "FOUR",
-        "FIVE",
-        "SIX",
-        "SEVEN",
-        "EIGHT",
-        "NINE",
-        "TEN",
-        "JACK",
-        "QUEEN",
-        "KING"
-    ]
-
     @property
     def suit(self):
         return self.__suit
@@ -40,7 +39,7 @@ class Card:
 
     def get_suit_index(self, value):
         if isinstance(value, str):
-            return self.Suit.index(value.upper())
+            return Suit.index(value.upper())
         elif isinstance(value, int) and value >= 0 and value < 4:
             return value
         else:
@@ -48,7 +47,7 @@ class Card:
 
     def get_rank_index(self, value):
         if isinstance(value, str):
-            return self.Rank.index(value.upper())
+            return Rank.index(value.upper())
         elif isinstance(value, int) and 0 <= value < 13:
             return value
         else:
@@ -61,7 +60,7 @@ class Card:
         self.__rank = self.get_rank_index(x)
 
     def display_card_as_text(self):  # displays a card in text
-        print(self.Rank[self.__rank] + " of " + self.Suit[self.__suit])
+        print(Rank[self.__rank] + " of " + Suit[self.__suit])
 
     def get_value(self, flag):  # returns the value of a card
         # Returns the value of a card
@@ -91,13 +90,13 @@ class Card:
             return " " if short else "  "
 
     def get_display_suit(self):
-        if self.suit == self.Suit.index("HEARTS"):
+        if self.suit == Suit.index("HEARTS"):
             return '\u2665'
-        if self.suit == self.Suit.index("DIAMONDS"):
+        if self.suit == Suit.index("DIAMONDS"):
             return '\u2666'
-        if self.suit == self.Suit.index("CLUBS"):
+        if self.suit == Suit.index("CLUBS"):
             return '\u2663'
-        if self.suit == self.Suit.index("SPADES"):
+        if self.suit == Suit.index("SPADES"):
             return '\u2660'
         else:
             return ' '

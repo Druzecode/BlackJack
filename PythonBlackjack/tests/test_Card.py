@@ -3,13 +3,13 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import pytest
-from Card import Card
+from Card import Card, Suit, Rank
 
 
 def test_card_defaults():
     card = Card()
-    assert card.suit == Card.Suit.index("HEARTS")
-    assert card.rank == Card.Rank.index("ACE")
+    assert card.suit == Suit.index("HEARTS")
+    assert card.rank == Rank.index("ACE")
 
 @pytest.mark.parametrize("suits, ranks", [
     (range(0,4), range(0, 13)),
