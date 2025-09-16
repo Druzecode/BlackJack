@@ -25,9 +25,9 @@ class DispLg:
 
     def print_game(self, player, house=None, bet=None, hole_card=False):
         print("\033c", end="")  # Clear screen
-        bet_str = f"Bet: ${bet}"
+        bet_str = "Bet: $" + str(bet)
         print(bet_str, end="")
-        money = f" (${player.money})"
+        money = " $" + str(player.money)
         for _ in range(16-len(bet_str)-len(money)):
             print(" ", end="")
         print(money)
@@ -37,24 +37,24 @@ class DispLg:
             print("┌───────┐", end="")
         print("")
         for card in player.hand:
-            print (f"│ {card.get_display_rank()}    │", end="")
+            print ("│ " + card.get_display_rank() + "    │", end="")
         print("")
         for card in player.hand:
             print ("│       │", end="")
         print("")
         for card in player.hand:
-            print (f"│   {card.get_display_suit()}   │", end="")
+            print ("│   " + card.get_display_suit() + "   │", end="")
         print("")
         for card in player.hand:
             print ("│       │", end="")
         print("")
         for card in player.hand:
-            print (f"│     {card.get_display_rank()}│", end="")
+            print ("│     " + card.get_display_rank() + "│", end="")
         print("")
         for card in player.hand:
             print("└───────┘", end="")
         print("")
-        print(f"{player.name}: {player.total}\n")
+        print(player.name + ": " + str(player.total) + "\n")
 
         #Draw house cards
         if house != None and house.num_of_cards > 0:
@@ -65,7 +65,7 @@ class DispLg:
                 if(hole_card and len(house.hand) > 1 and card == house.hand[1]):
                     print ("│*******│", end="")
                 else:
-                    print (f"│ {card.get_display_rank()}    │", end="")
+                    print ("│ " + card.get_display_rank() + "    │", end="")
             print("")
             for card in house.hand:
                 if(hole_card and len(house.hand) > 1 and card == house.hand[1]):
@@ -77,7 +77,7 @@ class DispLg:
                 if(hole_card and len(house.hand) > 1 and card == house.hand[1]):
                     print ("│*******│", end="")
                 else:
-                    print (f"│   {card.get_display_suit()}   │", end="")
+                    print ("│   " + card.get_display_suit() + "   │", end="")
             print("")
             for card in house.hand:
                 if(hole_card and len(house.hand) > 1 and card == house.hand[1]):
@@ -89,15 +89,15 @@ class DispLg:
                 if(hole_card and len(house.hand) > 1 and card == house.hand[1]):
                     print ("│*******│", end="")
                 else:
-                    print (f"│     {card.get_display_rank()}│", end="")
+                    print ("│     " + card.get_display_rank() + "│", end="")
             print("")
             for card in house.hand:
                 print("└───────┘", end="")
             print("")
             if hole_card:
-                print(f"{house.name} showing {house.hand[0].get_display_rank()}\n")
+                print(house.name + " showing " + house.hand[0].get_display_rank() + "\n")
             else:
-                print(f"{house.name}: {house.total}\n")
+                print(house.name + ":" + str(house.total) + "\n")
 
     def draw_back(self, card):  # draws the back of a card (for hold cards)
         print("\t┌───────┐")
@@ -113,11 +113,11 @@ class DispLg:
 
     def draw_card(self, card):  # draws a specific card's picture
         print("\t┌───────┐")
-        print(f"\t│ {card.get_display_rank()}    │")
+        print("\t│ " + card.get_display_rank() + "    │")
         print("\t│           │")
-        print(f"\t│   {card.get_display_suit()}    │")
+        print("\t│   " + card.get_display_suit() + "    │")
         print("\t│           │")
-        print(f"\t│    {card.get_display_rank()} │")
+        print("\t│    " + card.get_display_rank() + " │")
         print("\t└───────┘")
 
         print("\t", end="")

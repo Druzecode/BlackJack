@@ -61,7 +61,7 @@ class Card:
         self.__rank = self.get_rank_index(x)
 
     def display_card_as_text(self):  # displays a card in text
-        print(f"{self.Rank[self.__rank]} of {self.Suit[self.__suit]}")
+        print(self.Rank[self.__rank] + " of " + self.Suit[self.__suit])
 
     def get_value(self, flag):  # returns the value of a card
         # Returns the value of a card
@@ -78,7 +78,7 @@ class Card:
         if self.rank == 0:
             return "A" if short else "A "
         elif 1 <= self.rank <= 8:
-            return str(self.rank + 1) if short else f"{self.rank + 1} "
+            return str(self.rank + 1) if short else str(self.rank + 1) + " "
         elif self.rank == 9:
             return "T" if short else "10"
         elif self.rank == 10:

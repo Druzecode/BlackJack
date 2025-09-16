@@ -44,7 +44,7 @@ class Game:
             if go.lower() == 'x':
                 break
         
-        print(f"Your final total was: ${self._player.money}")
+        print("Your final total was: $" + str(self._player.money))
         print("Thanks for playing!\n")
 
     def _validate_bet(self, bet):
@@ -54,7 +54,7 @@ class Game:
             if bet > self._player.money:
                 print("You do not have that much money!\n")
             elif bet < self.__min_bet:
-                print(f"You must enter a valid bet (minimum ${self.__min_bet})!\n")
+                print("You must enter a valid bet (minimum " + str(self.__min_bet) + ")!\n")
             else:
                 print()  # Print a newline on successful input
                 return True
@@ -64,7 +64,7 @@ class Game:
    
     def bet(self):
         while True:
-            print(f"You have ${self._player.money}")
+            print("You have $" + str(self._player.money))
             bet = input("Enter bet: $")
             if self._validate_bet(bet):
                 break
@@ -163,9 +163,9 @@ class Game:
         self.play_hand(player2)
         self.h_play(player2)
 
-        print(f"First Hand: {player1.total} - ", end="")
+        print("First Hand: " + player1.total + " - ", end="")
         result1 = self.decision(player1)
-        print(f"Second Hand: {player2.total} - ", end="")
+        print("Second Hand: " + player2.total + " - ", end="")
         result2 = self.decision(player2)
         self.settle(result1 + result2)
 
@@ -179,7 +179,7 @@ class Game:
         while True:
             self._game_display.print_game(player, self._house, self.__current_bet)
             time.sleep(.5)
-            print(f"{self._house.name} chooses to ", end="")
+            print(self._house.name  + " chooses to ", end="")
             if self._house.total < 17:
                 print("hit\n")
                 time.sleep(.5)
@@ -244,7 +244,7 @@ class Game:
             return 0
 
     def settle(self, result):
-        print(f"Result: {result}")
+        print("Result: " + str(result))
         self._player.settle_bet(result)
         self._player.reset_hand()
         self._house.reset_hand()
